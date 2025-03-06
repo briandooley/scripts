@@ -5,7 +5,7 @@ import urllib.parse
 import re
 
 def parse_jira_url(jira_url):
-    """Extracts the JIRA instance URL and JQL query from a JIRA search URL."""
+    # Extracts the JIRA instance URL and JQL query from a JIRA search URL
     match = re.match(r"(https://[^/]+).*?[?&]jql=([^&]+)", jira_url)
     if not match:
         raise ValueError("Invalid JIRA search URL format.")
@@ -15,7 +15,7 @@ def parse_jira_url(jira_url):
     return jira_instance, jql_query
 
 def get_jira_issues(jira_instance, jql_query, api_token):
-    """Fetches JIRA issues using the JQL query."""
+    # Fetches JIRA issues using the JQL query
     api_url = f"{jira_instance}/rest/api/2/search"
     headers = {
         "Accept": "application/json",
@@ -32,7 +32,7 @@ def get_jira_issues(jira_instance, jql_query, api_token):
     return response.json()
 
 def calculate_story_points(issues):
-    """Calculates total story points and finds issues missing story points."""
+    # Calculates total story points and finds issues missing story points
     total_points = 0
     issues_without_points = []
     
